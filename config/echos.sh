@@ -38,3 +38,14 @@ function error() {
     echo -e "$COL_RED[error]$COL_RESET "$1
 }
 
+function awesome_header() {
+    echo -en "\n$COL_RED          ██            ██     ████ ██  ██ $COL_RESET"
+    echo -en "\n$COL_RED         ░██           ░██    ░██░ ░░  ░██ $COL_RESET"
+    echo -en "\n$COL_RED         ░██  ██████  ██████ ██████ ██ ░██  █████   ██████ $COL_RESET"
+    echo -en "\n$COL_RED      ██████ ██░░░░██░░░██░ ░░░██░ ░██ ░██ ██░░░██ ██░░░░ $COL_RESET"
+    echo -en "\n$COL_RED     ██░░░██░██   ░██  ░██    ░██  ░██ ░██░███████░░█████ $COL_RESET"
+    echo -en "\n$COL_RED    ░██  ░██░██   ░██  ░██    ░██  ░██ ░██░██░░░░  ░░░░░██ $COL_RESET"
+    echo -en "\n$COL_RED    ░░██████░░██████   ░░██   ░██  ░██ ███░░██████ ██████ $COL_RESET"
+    echo -en "\n$COL_RED     ░░░░░░  ░░░░░░     ░░    ░░   ░░ ░░░  ░░░░░░ ░░░░░░ $COL_RESET"
+    echo -en "\n"
+}
