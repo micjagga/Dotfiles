@@ -39,13 +39,13 @@ function error() {
 }
 
 function awesome_header() {
-    echo -en "\n$COL_RED          ██            ██     ████ ██  ██ $COL_RESET"
-    echo -en "\n$COL_RED         ░██           ░██    ░██░ ░░  ░██ $COL_RESET"
-    echo -en "\n$COL_RED         ░██  ██████  ██████ ██████ ██ ░██  █████   ██████ $COL_RESET"
-    echo -en "\n$COL_RED      ██████ ██░░░░██░░░██░ ░░░██░ ░██ ░██ ██░░░██ ██░░░░ $COL_RESET"
-    echo -en "\n$COL_RED     ██░░░██░██   ░██  ░██    ░██  ░██ ░██░███████░░█████ $COL_RESET"
-    echo -en "\n$COL_RED    ░██  ░██░██   ░██  ░██    ░██  ░██ ░██░██░░░░  ░░░░░██ $COL_RESET"
-    echo -en "\n$COL_RED    ░░██████░░██████   ░░██   ░██  ░██ ███░░██████ ██████ $COL_RESET"
-    echo -en "\n$COL_RED     ░░░░░░  ░░░░░░     ░░    ░░   ░░ ░░░  ░░░░░░ ░░░░░░ $COL_RESET"
+    echo -en "\n$COL_GREEN          ██            ██     ████ ██  ██ $COL_RESET"
+    echo -en "\n$COL_GREEN         ░██           ░██    ░██░ ░░  ░██ $COL_RESET"
+    echo -en "\n$COL_GREEN         ░██  ██████  ██████ ██████ ██ ░██  █████   ██████ $COL_RESET"
+    echo -en "\n$COL_GREEN      ██████ ██░░░░██░░░██░ ░░░██░ ░██ ░██ ██░░░██ ██░░░░ $COL_RESET"
+    echo -en "\n$COL_GREEN     ██░░░██░██   ░██  ░██    ░██  ░██ ░██░███████░░█████ $COL_RESET"
+    echo -en "\n$COL_GREEN    ░██  ░██░██   ░██  ░██    ░██  ░██ ░██░██░░░░  ░░░░░██ $COL_RESET"
+    echo -en "\n$COL_GREEN    ░░██████░░██████   ░░██   ░██  ░██ ███░░██████ ██████ $COL_RESET"
+    echo -en "\n$COL_GREEN     ░░░░░░  ░░░░░░     ░░    ░░   ░░ ░░░  ░░░░░░ ░░░░░░ $COL_RESET"
     echo -en "\n"
 }
