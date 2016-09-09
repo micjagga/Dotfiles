@@ -24,7 +24,7 @@ action "install Homebrew and brew cask"
 action "install all better default applications"
 action "if you feel like it, we will also install more things"
 
-bot "Also! I'm going to install some tooling and tweak your system settings. Here I go..."
+bot " I'm going to install some tooling and tweak your system settings. Here I go..."
 
 # Ask for the administrator password upfront
 if sudo grep -q "# %wheel\tALL=(ALL) NOPASSWD: ALL" "/etc/sudoers"; then
@@ -51,6 +51,23 @@ if [[ $response =~ (yes|y|Y) ]];then
    fi
 fi
 
+print_error() {
+  # Print output in red
+  printf "\e[0;31m  [✖] $1 $2\e[0m\n"
+}
+
+print_result() {
+  [ $1 -eq 0 ] \
+    && print_success "$2" \
+    || print_error "$2"
+
+  [ "$3" == "true" ] && [ $1 -ne 0 ] \
+    && exit
+}
+print_success() {
+  # Print output in green
+  printf "\e[0;32m  [✔] $1\e[0m\n"
+}
 
 ##############################################################################
 # XCode Command Line Tools                                                    #
@@ -64,10 +81,12 @@ if [[ $? != 0 ]]; then
 
     read -r -p "Let's go? [y|N] " response
     if [[ $response =~ ^(y|yes|Y) ]];then
-        xcode-select --install
+        xcode-select --install &> /dev/null
     fi
-
-    exit -1
+    # Wait until the XCode Command Line Tools are installed
+    until xcode-select --print-path &> /dev/null; do
+        sleep 5
+    done
 fi
 ok
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -76,54 +95,55 @@ ok
   # the appropriate directory from within `Xcode.app`
   # https://github.com/alrra/dotfiles/issues/13
 
-  sudo xcode-select -switch /Applications/Xcode.app/Contents/Developer
-  print_result $? 'Make "xcode-select" developer directory point to Xcode'
+sudo xcode-select -switch /Applications/Xcode.app/Contents/Developer
+action 'Making "xcode-select" developer directory point to Xcode' ok
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   # Prompt user to agree to the terms of the Xcode license
   # https://github.com/alrra/dotfiles/issues/10
 
-  sudo xcodebuild -license
-  print_result $? 'Agree with the XCode Command Line Tools licence'
-
-fi
+sudo xcodebuild -license
+bot 'Agree with the XCode Command Line Tools licence'
 
 bot "OK, let's roll..."
 
 
-# bot "Woot! All done. If you want to go further, here are some options:"
+bot "Woot! All done. If you want to go further, here are some options:"
 
-# read -r -p "install extra development command-line tools? (node, curl, etc) [y|N] " cli_response
-# if [[ $cli_response =~ ^(y|yes|Y) ]];then
-#     ok "will install command-line tools."
-# else
-#     ok "will skip command-line tools.";
-# fi
+read -r -p "install extra development command-line tools? (node, curl, etc) [y|N] " cli_response
+if [[ $cli_response =~ ^(y|yes|Y) ]];then
+    ok "will install command-line tools."
+else
+    ok "will skip command-line tools.";
+fi
+bot "Creating missing Site & Developer directories for your development"
+read -r -p "create development folder structure (~/Development/sites)? [y|N] " dev_folder_response
+if [[ $dev_folder_response =~ ^(y|yes|Y) ]];then
+    ok "will create the folder structure."
+else
+    ok "will skip folder structure.";
+fi
 
-# read -r -p "create our development folder structure (~/Development/sites)? [y|N] " dev_folder_response
-# if [[ $dev_folder_response =~ ^(y|yes|Y) ]];then
-#     ok "will create the folder structure."
-# else
-#     ok "will skip folder structure.";
-# fi
+if [[ $cli_response =~ ^(y|yes|Y) ]];then
+    ./bin/setup.sh
+else
+    ok "skipped command-line tools.";
+fi
 
-# if [[ $cli_response =~ ^(y|yes|Y) ]];then
-#     ./cli.sh
-# else
-#     ok "skipped command-line tools.";
-# fi
+if [[ $dev_folder_response =~ ^(y|yes|Y) ]];then
+    mkdir -p ~/Development/sites/
+    ok "Created ~/Development/sites/"
+else
+    ok "skipped development folder structure.";
+fi
 
-# if [[ $cli_response =~ ^(y|yes|Y) ]];then
-#     mkdir -p ~/Development/sites/
+bot " I'm going to install some tooling and tweak your system settings. Here I go..."
+./install.sh
 
-#     ok "Created ~/Development/sites/"
-# else
-#     ok "skipped development folder structure.";
-# fi
 
-# bot "That's it for the automated process. If you want to do more, have a look at the Going Further section:"
-# running "https://github.com/springload/dotfiles#going-further"
+
+
 
 # bot "Here are the most useful resources. Have fun!"
 # running "OSX preferences for hackers: https://github.com/springload/dotfiles#osx-preferences"

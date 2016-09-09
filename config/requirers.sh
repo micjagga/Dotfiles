@@ -97,10 +97,3 @@ function require_nvm() {
     ok
 }
 
-function require_pip(){
-
-}
-
-function require_pip3(){
-
-}

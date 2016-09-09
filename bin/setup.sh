@@ -77,6 +77,7 @@ if [[ $unixresponse =~ ^(y|yes|Y) ]];then
     require_brew tmux
     require_brew screen
     require_brew mysql
+    require_brew fontconfig
 
     ok "packages installed..."
 else
@@ -147,6 +148,25 @@ if [[ $packagesresponse =~ ^(y|yes|Y) ]];then
     require_npm hyperlink
     require_npm csscomb
     require_npm disc
+    require_npm svgo
+    require_npm yo
+    require_npm flow-bin
+    require_npm flow-typed
+    require_npm servedir
+    require_npm npm-check-updates
+
+    # Globally install with npm
+    # To list globally installed npm packages and version: npm list -g --depth=0
+    #
+    # Some descriptions:
+    #
+    # diff-so-fancy — sexy git diffs
+    # git-recent — Type `git recent` to see your recent local git branches
+    # git-open — Type `git open` to open the GitHub page or website for a repository
+    require_npm diff-so-fancy
+    require_npm git-recent
+    require_npm git-open
+    require_npm http-server
 
     require_gem bundler
     require_gem rake

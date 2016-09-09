@@ -7,6 +7,7 @@
 #
 
 source ./configurations/bot/echos.sh
+Bot "Setting up macos defaults - Thanks to https://github.com/mathiasbynens/dotfiles/blob/master/.osx "
 
 COMPUTERNAME="Enoc Leonrd's MBP"
 HOSTNAME='mbp'

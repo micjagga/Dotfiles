@@ -3,6 +3,7 @@ source ./configurations/bot/echos.sh
 
 bot "Installing fonts..."
 
+
 # Set source and target directories
 powerline_fonts_dir=$( cd "$( dirname "$0" )" && pwd )
 action "Locating indexed/patched fonts..."

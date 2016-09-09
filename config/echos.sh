@@ -47,5 +47,9 @@ function awesome_header() {
     echo -en "\n$COL_GREEN    ░██  ░██░██   ░██  ░██    ░██  ░██ ░██░██░░░░  ░░░░░██ $COL_RESET"
     echo -en "\n$COL_GREEN    ░░██████░░██████   ░░██   ░██  ░██ ███░░██████ ██████ $COL_RESET"
     echo -en "\n$COL_GREEN     ░░░░░░  ░░░░░░     ░░    ░░   ░░ ░░░  ░░░░░░ ░░░░░░ $COL_RESET"
+    echo -en "\n$COL_GREEN  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓$COL_RESET"
+    echo -en "\n$COL_GREEN  ░▓ Software Installation, Configuration and Preferences for OS ▓$COL_RESET"
+    echo -en "\n$COL_GREEN  ░▓ https://github.com/micjagga/dotfiles                        ▓$COL_RESET"
+    echo -en "\n$COL_GREEN  ░▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓$COL_RESET"
     echo -en "\n"
 }
