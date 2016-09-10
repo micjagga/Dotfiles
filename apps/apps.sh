@@ -45,6 +45,13 @@ else
     ok "will skip Utility tools.";
 fi
 
+read -r -p "would you like to install a few Atom community packages? [y|N] " atomresponse
+if [[ $atomresponse =~ ^(y|yes|Y) ]];then
+    ok "will install atom packages."
+else
+    ok "will skip installing atom packages.";
+fi
+
 bot "Let's go! Make sure to check on your computer regularly in case something needs your password."
 
 if [[ $everydayresponse =~ ^(y|yes|Y) ]];then
@@ -176,7 +183,8 @@ fi
 ###############################################################################
 bot "Setting up apps..."
 ###############################################################################
-bot "Atom "
+bot "Atom"
+action "install atom community packages..."
 action 'Symlinking Atom to [~/]'
 running "Copying Atom settings.."
 mv -f ~/.atom ~/.dotfiles_backup/
@@ -185,9 +193,13 @@ ln -s ./apps/atom ~/.atom; ok
 running "Copying over Atom packages"
 cp -r ./apps/atom/packages.list ~/.atom; ok
 
-running "Installing Atom community packages"
-apm list --installed # --bare  - get a list of installed packages
-apm install --packages-file ~/.atom/packages.list; ok
+if [[ $atomresponse =~ ^(y|yes|Y) ]];then
+    running "Installing Atom community packages"
+    apm list --installed # --bare  - get a list of installed packages
+    apm install --packages-file ~/.atom/packages.list; ok
+else
+    ok "skipped Installing Atom Community Packages.";
+fi
 
 bot 'iTerm 2'
 source ./applications/iterm\ 2/install.sh
@@ -196,3 +208,4 @@ bot 'Sublime Text 3'
 source ./applications/sublime\ text\ 3/install.sh
 ok
 bot "All done!"
+

@@ -267,6 +267,11 @@ ok
 pyenv global miniconda-latest
 # update pip
 easy_install pip
+source ~/.profile
+
+mkvirtualenv <Test>
+workon <Test>
+source deactivate
 
 running "cleanup homebrew"
 brew cleanup > /dev/null 2>&1
