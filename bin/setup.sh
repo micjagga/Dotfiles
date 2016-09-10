@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 source ./config/echos.sh
+source ./config/requirers.sh
 
 ###############################################################################
 #Install CLI tools using Homebrew                                             #
@@ -46,7 +47,7 @@ if [[ $unixresponse =~ ^(y|yes|Y) ]];then
     require_brew zsh-completions
 
     # Install more recent versions of some OS X tools
-    brew 'homebrew/dupes/grep'
+    require_brew 'homebrew/dupes/grep'
 
     # Install Binaries
     require_brew git
@@ -89,8 +90,9 @@ if [[ $runtimesresponse =~ ^(y|yes|Y) ]];then
 
     require_brew node
     require_brew ruby
-    require_brew python
-    require_brew python3
+    require_brew nvm
+    # require_brew python
+    # require_brew python3
 
     ok "packages installed..."
 else
@@ -100,36 +102,7 @@ fi
 if [[ $packagesresponse =~ ^(y|yes|Y) ]];then
     action "install npm / gem / pip packages..."
 
-    function require_gem() {
-        running "gem $1"
-        if [[ $(gem list --local | grep "$1" | head -1 | cut -d' ' -f1) != "$1" ]];
-            then
-                action "gem install $1"
-                gem install "$1"
-        fi
-        ok
-    }
 
-    function require_pip() {
-        running "pip $1"
-        if [[ $(pip list --local | grep "$1" | head -1 | cut -d' ' -f1) != "$1" ]];
-            then
-                action "pip install $1"
-                pip install "$1"
-        fi
-        ok
-    }
-
-    npmlist=$(npm list -g)
-    function require_npm() {
-        running "npm $1"
-        echo "$npmlist" | grep "$1@" > /dev/null
-        if [[ $? != 0 ]]; then
-            action "npm install -g $1"
-            npm install -g "$1"
-        fi
-        ok
-    }
 
     require_npm bower
     require_npm browser-sync
@@ -144,7 +117,6 @@ if [[ $packagesresponse =~ ^(y|yes|Y) ]];then
     require_npm eslint
     require_npm eslint-plugin-react
     require_npm babel-eslint
-    require_npm sitespeed.io
     require_npm hyperlink
     require_npm csscomb
     require_npm disc
@@ -173,11 +145,22 @@ if [[ $packagesresponse =~ ^(y|yes|Y) ]];then
     require_gem sass
     require_gem scss-lint
 
-    require_pip virtualenv
+    require_brew pyenv
+    requir pyenv-virtualenv
+    require_brew pyenv-virtualenvwrapper
+    require_pip requests
+    require_pip beautifulsoup
+    require_pip pillow
+    require_pip sqlalchemy
+    require_pip pygments
+    require_pip flask
+    require_pip flake8
+    require_pip flake8-docstrings
 
+    require_apm linter-flake8
     ok "packages installed..."
 else
-    ok "skipped packages.";
+    ok "skipped packages."
 fi
 # Copy binaries
 ln -fs ./bin $HOME

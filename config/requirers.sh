@@ -45,19 +45,8 @@ function require_node(){
     ok
 }
 
-function require_gem() {
-    running "gem $1"
-    if [[ $(gem list --local | grep $1 | head -1 | cut -d' ' -f1) != $1 ]];
-        then
-            action "gem install $1"
-            gem install $1
-    fi
-    ok
-}
-
 function require_npm() {
     sourceNVM
-    nvm use 4.4.4
     running "npm $*"
     npm list -g --depth 0 | grep $1@ > /dev/null
     if [[ $? != 0 ]]; then
@@ -83,17 +72,34 @@ function sourceNVM(){
 }
 
 
-function require_nvm() {
-    mkdir -p ~/.nvm
-    cp $(brew --prefix nvm)/nvm-exec ~/.nvm/
-    sourceNVM
-    nvm install $1
-    if [[ $? != 0 ]]; then
-        action "installing nvm"
-        require_brew nvm
-        . ~/.bashrc
-        nvm install $1
-    fi
-    ok
-}
+function require_gem() {
+        running "gem $1"
+        if [[ $(gem list --local | grep "$1" | head -1 | cut -d' ' -f1) != "$1" ]];
+            then
+                action "gem install $1"
+                gem install "$1"
+        fi
+        ok
+    }
 
+    function require_pip() {
+        running "pip $1"
+        if [[ $(pip list --local | grep "$1" | head -1 | cut -d' ' -f1) != "$1" ]];
+            then
+                action "pip install $1"
+                pip install "$1"
+        fi
+        ok
+    }
+
+    npmlist=$(npm list -g)
+    function require_npm() {
+        sourceNVM
+        running "npm $1"
+        echo "$npmlist" | grep "$1@" > /dev/null
+        if [[ $? != 0 ]]; then
+            action "npm install -g $1"
+            npm install -g "$1"
+        fi
+        ok
+    }

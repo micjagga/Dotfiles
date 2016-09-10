@@ -16,11 +16,11 @@ export PATH=$PATH:/usr/local/opt/go/libexec/bin
 
 # The next line enables shell command completion for gcloud.
 #source "/Users/$(whoami)/Downloads/google-cloud-sdk/completion.zsh.inc"
-Contact GitHub API Training Shop Blog About
+
 
  #Python
  export PATH="/usr/local/share/python:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 
 # Virtual Environment
-  #export WORKON_HOME=$HOME/.virtualenvs
-  #export PROJECT_HOME=$HOME/Projects
+  export WORKON_HOME=$HOME/.virtualenvs
+  export PROJECT_HOME=$HOME/Development/Projects

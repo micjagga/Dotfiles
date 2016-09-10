@@ -1,0 +1,31 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"AutoAligner",
+		"Boxy Theme",
+		"Boxy Theme Addon - Linter Theme",
+		"Theme - Glacier",
+		"JsonTree",
+		"BracketHighlighter",
+		"Color Highlighter",
+		"Dotfiles Syntax Highlighting",
+		"EditorConfig",
+		"JsonTree",
+		"Markdown Preview",
+		"Material Theme",
+		"Neon Color Scheme",
+		"Package Control",
+		"Pretty JSON",
+		"Python Improved",
+		"SideBarEnhancements",
+		"SideBarGit",
+		"SublimeCodeIntel",
+		"SublimeLinter",
+		"SublimeREPL",
+		"Tag"
+		]
+}

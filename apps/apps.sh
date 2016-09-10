@@ -171,4 +171,27 @@ if [[ $utilresponse =~ ^(y|yes|Y) ]];then
 else
     ok "skipped Utility tools.";
 fi
+# Setup applications
+###############################################################################
+bot "Setting up apps..."
+###############################################################################
+bot "Atom "
+action 'Symlinking Atom to [~/]'
+running "Copying Atom settings.."
+mv -f ~/.atom ~/.dotfiles_backup/
+ln -s ./apps/atom ~/.atom; ok
 
+running "Copying over Atom packages"
+cp -r ./apps/atom/packages.list ~/.atom; ok
+
+running "Installing Atom community packages"
+apm list --installed # --bare  - get a list of installed packages
+apm install --packages-file ~/.atom/packages.list; ok
+
+bot 'iTerm 2'
+source ./applications/iterm\ 2/install.sh
+
+bot 'Sublime Text 3'
+source ./applications/sublime\ text\ 3/install.sh
+ok
+bot "All done!"

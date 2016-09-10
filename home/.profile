@@ -17,4 +17,10 @@ if [ -d $HOME/.dotfiles/zsh/ ]; then
     for config_file ($HOME/.dotfiles/zsh/*.zsh) source $config_file
   fi
 fi
-#source /usr/local/bin/virtualenvwrapper.sh
+
+# pyenv
+export PYENV_ROOT="${HOME}/.pyenv"
+if [ -d "${PYENV_ROOT}" ]; then
+    export PATH=${PYENV_ROOT}/bin:$PATH
+    eval "$(pyenv init -)"
+fi

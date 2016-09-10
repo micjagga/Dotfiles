@@ -6,7 +6,7 @@
 # ~/dotfiles/osx/set-defaults.sh — http://mths.be/osx
 #
 
-source ./configurations/bot/echos.sh
+source ./config/echos.sh
 Bot "Setting up macos defaults - Thanks to https://github.com/mathiasbynens/dotfiles/blob/master/.osx "
 
 COMPUTERNAME="Enoc Leonrd's MBP"

@@ -27,4 +27,4 @@ export GROOVY_HOME=/usr/local/opt/groovy/libexec
 #########################################################################
 export FONTCONFIG_PATH=/opt/X11/lib/X11/fontconfig
 export NVM_DIR=~/.nvm
-Contact GitHub API Training Shop Blog About
+

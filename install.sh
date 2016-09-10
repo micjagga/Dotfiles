@@ -4,8 +4,8 @@
 # This script installs the dotfiles and symlink better system defaults to the system
 # ###########################
 
-source ./configurations/bot/echos.sh
-source ./configurations/bot/requirers.sh
+source ./config/echos.sh
+source ./config/requirers.sh
 
 # Warn user this script will overwrite current dotfiles
 while true; do
@@ -145,6 +145,9 @@ action "Setting up your Mac..." ok
 
 action "initialisaing home..." ok
 mkdir -p ~/.home
+mkdir -p ~/Documents/Temp
+mkdir -p ~/Documents/Code
+mkdir -p ~/Documents/Temp/Scratch
 
 # install osk settings, app preferences and bin directories
 source ./apps/apps.sh
@@ -234,17 +237,25 @@ action 'activating zsh enhancements'
 echo 'for config_file ($HOME/.dotfiles/zsh/*.zsh) source $config_file ' >> ~/.zshrc  ok
 
 # Symlink online-check.sh
-ln -fs ./configurations/online-check.sh ~/online-check.sh
+ln -fs ./config/online-check.sh  ~/online-check.sh
 
 action "Write out current crontab"
 crontab -l > mycron
 # Echo new cron into cron file
-echo "* * * * * ~/online-check.sh" >> mycron
+echo "0 1 * * * ~/online-check.sh" >> mycron
+echo "0 2 * * *  gem update -V -y" >> mycron
+echo "# brew nightly updates" >> mycron
+echo "0 3 * * *  brew update" >> mycron
+echo "0 4 * * *  brew upgrade" >> mycron
+echo "# npm" >> mycron
+echo "0 5 * * *  npm update npm -g" >> mycron
+echo "0 6 * * *  npm update -g" >> mycron
 # Install new cron file
 crontab mycron
 rm mycron
-
+##############################################################
 # nvm
+##################################################################
 if test ! $(which nvm)
 then
   bot "Installing a stable version of Node..."
@@ -261,6 +272,29 @@ fi
 
 # All `npm install <pkg>` commands will pin to the version that was available at the time you run the command
 npm config set save-exact = true
+###########################################################################
+# Python
+###########################################################################
+
+# Python from pyenv
+echo  '\n%s\n%s\n%s' '# virtualenv set up' \
+'if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi' \
+'if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi' \
+'pyenv virtualenvwrapper' >> ~/.profile
+
+source ~/.profile
+
+# Installing python 2
+pyenv install 2.7.12
+
+# Installing Python 3
+pyenv install 3.5.2
+# Setting python 3 globally
+pyenv global 3.5.2
+pip install --upgrade pip
+# pip should only run if there is a virtualenv currently activated
+echo "export PIP_REQUIRE_VIRTUALENV=true" >> ~/.profile
+
 
 running "cleanup homebrew"
 brew cleanup > /dev/null 2>&1

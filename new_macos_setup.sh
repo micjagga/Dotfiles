@@ -126,7 +126,7 @@ else
 fi
 
 if [[ $cli_response =~ ^(y|yes|Y) ]];then
-    ./bin/setup.sh
+    bash ./bin/setup.sh
 else
     ok "skipped command-line tools.";
 fi
@@ -138,8 +138,8 @@ else
     ok "skipped development folder structure.";
 fi
 
-bot " I'm going to install some tooling and tweak your system settings. Here I go..."
-./install.sh
+bot "I'm going to install some tooling and tweak your system settings. Here I go..."
+bash ./install.sh
 
 
 
