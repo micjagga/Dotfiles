@@ -142,3 +142,7 @@ function dockershell () {
   bash --login '/Applications/Docker/Docker Quickstart Terminal.app/Contents/Resources/Scripts/start.sh'
 }
 
+# define a "global pip" function to use outside virtualenv:
+gpip(){
+    PIP_REQUIRE_VIRTUALENV="" pip "$@"
+}

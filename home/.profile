@@ -6,7 +6,6 @@ source ~/.shellvars
 source ~/.shellfn
 source ~/.shellpaths
 source ~/.shellaliases
-source ~/.bin/path
 source ~/shell_config
 
 # Private/Proprietary shell aliases (not to be checked into the public repo) :)
@@ -18,9 +17,4 @@ if [ -d $HOME/.dotfiles/zsh/ ]; then
   fi
 fi
 
-# pyenv
-export PYENV_ROOT="${HOME}/.pyenv"
-if [ -d "${PYENV_ROOT}" ]; then
-    export PATH=${PYENV_ROOT}/bin:$PATH
-    eval "$(pyenv init -)"
-fi
+

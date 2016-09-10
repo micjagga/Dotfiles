@@ -139,10 +139,7 @@ running " \xF0\x9f\x8d\xba  casking your applications..." ok
 # Ensure brew works well
 brew doctor
 
-
-
 action "Setting up your Mac..." ok
-
 action "initialisaing home..." ok
 mkdir -p ~/.home
 mkdir -p ~/Documents/Temp
@@ -170,7 +167,6 @@ if [[ "$CURRENTSHELL" != "/usr/local/bin/zsh" ]]; then
 fi
 
 bot "Creating directories for your customizations"
-
 mkdir -p $HOME/.home/.zsh.start_with
 mkdir -p $HOME/.home/.zsh.end_with
 mkdir -p $HOME/.home/.zsh.prompts
@@ -201,14 +197,11 @@ popd > /dev/null 2>&1
 
 
 bot "Installing Prezto (ZSH Enhancements)..."
-
 ln -nfs ~/.dotfiles/zsh/prezto ${ZDOTDIR:-$HOME}/.zprezto
-
 action "creating symlinks for prezto files..."
 
 pushd  ~/.zprezto/runcoms > /dev/null 2>&1
 now=$(date +"%Y.%m.%d.%H.%M.%S")
-
 for file in *; do
   if [[ $file == "." || $file == ".." ]]; then
     continue
@@ -232,10 +225,8 @@ popd > /dev/null 2>&1
 
 action "Overriding prezto ~/.zpreztorc with custom zpreztorc to enable additional modules..."
 ln -nfs ~/.dotfiles/zsh/zpreztorc  ${ZDOTDIR:-$HOME}/.zpreztorc
-
 action 'activating zsh enhancements'
 echo 'for config_file ($HOME/.dotfiles/zsh/*.zsh) source $config_file ' >> ~/.zshrc  ok
-
 # Symlink online-check.sh
 ln -fs ./config/online-check.sh  ~/online-check.sh
 
@@ -253,48 +244,29 @@ echo "0 6 * * *  npm update -g" >> mycron
 # Install new cron file
 crontab mycron
 rm mycron
-##############################################################
-# nvm
-##################################################################
-if test ! $(which nvm)
-then
-  bot "Installing a stable version of Node..."
 
-  # Install the latest stable version of node
-  nvm install stable
+bot "Installing a stable version of Node..."
+sourceNVM
+# Install the latest stable version of node
+nvm install stable
+# Switch to the installed version
+nvm use node
+# # Use the stable version of node by default
+nvm alias default node
 
-  # Switch to the installed version
-  nvm use node
-
-  # Use the stable version of node by default
-  nvm alias default node
-fi
-
-# All `npm install <pkg>` commands will pin to the version that was available at the time you run the command
-npm config set save-exact = true
-###########################################################################
-# Python
-###########################################################################
-
-# Python from pyenv
-echo  '\n%s\n%s\n%s' '# virtualenv set up' \
-'if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi' \
-'if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi' \
-'pyenv virtualenvwrapper' >> ~/.profile
-
-source ~/.profile
-
+bot "Installing a stable version of python..."
 # Installing python 2
 pyenv install 2.7.12
-
 # Installing Python 3
-pyenv install 3.5.2
+ok
+bot "Installing the dev version of python 3 & miniconda..."
+pyenv install 3.5.
+pyenv install miniconda-latest
+ok
 # Setting python 3 globally
-pyenv global 3.5.2
-pip install --upgrade pip
-# pip should only run if there is a virtualenv currently activated
-echo "export PIP_REQUIRE_VIRTUALENV=true" >> ~/.profile
-
+pyenv global miniconda-latest
+# update pip
+easy_install pip
 
 running "cleanup homebrew"
 brew cleanup > /dev/null 2>&1

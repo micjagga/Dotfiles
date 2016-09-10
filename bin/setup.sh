@@ -79,6 +79,7 @@ if [[ $unixresponse =~ ^(y|yes|Y) ]];then
     require_brew screen
     require_brew mysql
     require_brew fontconfig
+    require_brew fortune
 
     ok "packages installed..."
 else
@@ -91,18 +92,17 @@ if [[ $runtimesresponse =~ ^(y|yes|Y) ]];then
     require_brew node
     require_brew ruby
     require_brew nvm
-    # require_brew python
+    require_brew python
     # require_brew python3
 
     ok "packages installed..."
+
 else
     ok "skipped runtimes.";
 fi
 
 if [[ $packagesresponse =~ ^(y|yes|Y) ]];then
     action "install npm / gem / pip packages..."
-
-
 
     require_npm bower
     require_npm browser-sync
@@ -146,7 +146,7 @@ if [[ $packagesresponse =~ ^(y|yes|Y) ]];then
     require_gem scss-lint
 
     require_brew pyenv
-    requir pyenv-virtualenv
+    require pyenv-virtualenv
     require_brew pyenv-virtualenvwrapper
     require_pip requests
     require_pip beautifulsoup
