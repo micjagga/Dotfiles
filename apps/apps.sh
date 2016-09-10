@@ -69,6 +69,7 @@ if [[ $everydayresponse =~ ^(y|yes|Y) ]];then
     require_cask typora
     require_cask microsoft-office
     require_cask raindrop
+    require_cask notion
 
     ok "Music Players, Messangers, Utility Apps, Browsers etc. All set!"
     ok "Daily casks installed..."
