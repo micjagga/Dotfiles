@@ -2,6 +2,58 @@
 source ./config/echos.sh
 source ./config/requirers.sh
 
+###########################################
+# install homebrew (CLI Packages)
+############################################
+running "checking homebrew install"
+brew_bin=$(which brew) 2>&1 > /dev/null
+if [[ $? != 0 ]]; then
+  action "installing homebrew"
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    if [[ $? != 0 ]]; then
+      error "unable to install homebrew, script $0 abort!"
+      exit 2
+  fi
+else
+  ok
+  # Make sure we’re using the latest Homebrew
+  running "updating homebrew"
+  brew update
+  ok
+  bot "before installing brew packages, we can upgrade any outdated packages."
+  read -r -p "run brew upgrade? [y|N] " response
+  if [[ $response =~ ^(y|yes|Y) ]];then
+      # Upgrade any already-installed formulae
+      action "upgrade brew packages..."
+      brew upgrade --all
+      ok "brews updated..."
+  else
+      ok "skipped brew package upgrades.";
+  fi
+fi
+
+############################################################
+# install brew cask (UI Packages)
+###########################################################
+running "checking brew-cask install" ok
+output=$(brew tap | grep cask)
+if [[ $? != 0 ]]; then
+  action "installing brew-cask"
+  require_brew caskroom/cask/brew-cask
+fi
+brew tap caskroom/versions > /dev/null 2>&1
+ok
+
+#####
+# install brew cask (UI Packages)
+#####
+running " \xF0\x9f\x8d\xba  brewing your packages..." ok
+running " \xF0\x9f\x8d\xba  casking your applications..." ok
+
+# Ensure brew works well
+brew doctor
+
+
 ###############################################################################
 #Install CLI tools using Homebrew                                             #
 ###############################################################################
@@ -163,7 +215,7 @@ else
     ok "skipped packages."
 fi
 # Copy binaries
-ln -fs ./bin $HOME
+ln -fs ./bin ~/
 
 declare -a BINARIES=(
     'batcharge.py'

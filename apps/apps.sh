@@ -45,13 +45,6 @@ else
     ok "will skip Utility tools.";
 fi
 
-read -r -p "would you like to install a few Atom community packages? [y|N] " atomresponse
-if [[ $atomresponse =~ ^(y|yes|Y) ]];then
-    ok "will install atom packages."
-else
-    ok "will skip installing atom packages.";
-fi
-
 bot "Let's go! Make sure to check on your computer regularly in case something needs your password."
 
 if [[ $everydayresponse =~ ^(y|yes|Y) ]];then
@@ -181,19 +174,39 @@ else
 fi
 # Setup applications
 ###############################################################################
-bot "Setting up apps..."
+bot "Setting Up Applications..."
 ###############################################################################
-bot "Atom"
-action "install atom community packages..."
-action 'Symlinking Atom to [~/]'
-running "Copying Atom settings.."
-mv -f ~/.atom ~/.dotfiles_backup/
-ln -s ./apps/atom ~/.atom; ok
+read -r -p "would you like to install a few Atom community packages? [y|N] " atomresponse
+if [[ $atomresponse =~ ^(y|yes|Y) ]];then
+    ok "will install atom packages."
+else
+    ok "will skip installing atom packages.";
+fi
 
-running "Copying over Atom packages"
-cp -r ./apps/atom/packages.list ~/.atom; ok
+read -r -p "would you like to set up sublime text 3 [y|N] " subresponse
+if [[ $subresponse =~ ^(y|yes|Y) ]];then
+    ok "will setup sublime text 3."
+else
+    ok "will skip setting up sublime text 3.";
+fi
+
+read -r -p "would you like to configure Terminal and Iterm 2 with sane defauts [y|N] " termresponse
+if [[ $termresponse =~ ^(y|yes|Y) ]];then
+    ok "will configure terminal & iterm."
+else
+    ok "will skip configuring terminal & iterm.";
+fi
 
 if [[ $atomresponse =~ ^(y|yes|Y) ]];then
+    bot "Atom"
+    action "install atom community packages..."
+    action 'Symlinking Atom to [~/]'
+    running "Copying Atom settings.."
+   mv  -f ~/.atom ~/.dotfiles_backup/
+    ln -s ./apps/atom ~/.atom; ok
+
+    running "Copying over Atom packages"
+    cp -r ./apps/atom/packages.list ~/.atom; ok
     running "Installing Atom community packages"
     apm list --installed # --bare  - get a list of installed packages
     apm install --packages-file ~/.atom/packages.list; ok
@@ -201,11 +214,20 @@ else
     ok "skipped Installing Atom Community Packages.";
 fi
 
+if [[ $termresponse =~ ^(y|yes|Y) ]];then
 bot 'iTerm 2'
-source ./applications/iterm\ 2/install.sh
+source ./apps/iterm2/install.sh
+else
+    ok "skipped configuring iterm 2 and terminal.";
+fi
 
-bot 'Sublime Text 3'
-source ./applications/sublime\ text\ 3/install.sh
+if [[ $subresponse =~ ^(y|yes|Y) ]];then
+bot "Initialising..."
+source ./apps/sublimetext3/install.sh
 ok
-bot "All done!"
+else
+    ok "skipped setting up sublime text 3.";
+fi
 
+bot "All done!"
+bot "Applications are a go!!"

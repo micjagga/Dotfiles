@@ -1,11 +1,10 @@
  #!/usr/bin/env bash
+source ./config/echos.sh
+source ./config/requirers.sh
 
 # ###########################
 # This script installs the dotfiles and symlink better system defaults to the system
 # ###########################
-
-source ./config/echos.sh
-source ./config/requirers.sh
 
 # Warn user this script will overwrite current dotfiles
 while true; do
@@ -16,7 +15,6 @@ while true; do
     * ) bot "Please answer yes or no.";;
   esac
 done
-
 
 grep 'user = GITHUBUSER' ./git/.gitconfig > /dev/null 2>&1
 if [[ $? = 0 ]]; then
@@ -67,11 +65,9 @@ if [[ $? = 0 ]]; then
     fi
   fi
 
-
   running "replacing items in .gitconfig with your info ($COL_YELLOW$fullname, $email, $githubuser$COL_RESET)"
 
   # test if gnu-sed or osx sed
-
   sed -i "s/GITHUBFULLNAME/$firstname $lastname/" ./.home/.gitconfig > /dev/null 2>&1 | true
   if [[ ${PIPESTATUS[0]} != 0 ]]; then
     echo
@@ -87,69 +83,41 @@ if [[ $? = 0 ]]; then
   fi
 fi
 
-#####
-# install homebrew (CLI Packages)
-#####
-
-running "checking homebrew install"
-brew_bin=$(which brew) 2>&1 > /dev/null
-if [[ $? != 0 ]]; then
-  action "installing homebrew"
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    if [[ $? != 0 ]]; then
-      error "unable to install homebrew, script $0 abort!"
-      exit 2
-  fi
-else
-  ok
-  # Make sure we’re using the latest Homebrew
-  running "updating homebrew"
-  brew update
-  ok
-  bot "before installing brew packages, we can upgrade any outdated packages."
-  read -r -p "run brew upgrade? [y|N] " response
-  if [[ $response =~ ^(y|yes|Y) ]];then
-      # Upgrade any already-installed formulae
-      action "upgrade brew packages..."
-      brew upgrade --all
-      ok "brews updated..."
-  else
-      ok "skipped brew package upgrades.";
-  fi
-fi
-
-#####
-# install brew cask (UI Packages)
-#####
-running "checking brew-cask install" ok
-output=$(brew tap | grep cask)
-if [[ $? != 0 ]]; then
-  action "installing brew-cask"
-  require_brew caskroom/cask/brew-cask
-fi
-brew tap caskroom/versions > /dev/null 2>&1
-ok
-
-#####
-# install brew cask (UI Packages)
-#####
-running " \xF0\x9f\x8d\xba  brewing your packages..." ok
-running " \xF0\x9f\x8d\xba  casking your applications..." ok
-
-# Ensure brew works well
-brew doctor
 
 action "Setting up your Mac..." ok
-action "initialisaing home..." ok
+action "initialisaing Home..."
 mkdir -p ~/.home
 mkdir -p ~/Documents/Temp
 mkdir -p ~/Documents/Code
 mkdir -p ~/Documents/Temp/Scratch
+ok
+# install osx settings, app preferences
+read -r -p "would you like to install [macos] applications, apps preferences and better app defaults? [y|N] " appresponse
+if [[ $appresponse =~ ^(y|yes|Y) ]];then
+    ok "will install [macos] applications, apps preferences and better app defaults "
+else
+    ok "will skip install of [macos] applications, apps preferences and better app defaults";
+fi
 
-# install osk settings, app preferences and bin directories
+if [[ $appresponse =~ ^(y|yes|Y) ]];then
 source ./apps/apps.sh
+else
+    ok "skipped Installing [macos] applications, apps preferences and better app defaults.";
+fi
+
+read -r -p "would you like to fixed width and powerline-fonts? [y|N] " fontresponse
+if [[ $fontresponse =~ ^(y|yes|Y) ]];then
+    ok "will install fixed width and powerline-fonts "
+else
+    ok "will skip install of fixed width and powerline-fonts";
+fi
+
+if [[ $fontresponse =~ ^(y|yes|Y) ]];then
 source ./fonts/install.sh
 ok
+else
+    ok "skipped Installing fixed width and powerline-fonts.";
+fi
 
 if [ -d $HOME/.dotfiles/zsh/ ] ; then
     export PATH="$HOME/.dotfiles/zsh/:$PATH"
@@ -251,8 +219,8 @@ sourceNVM
 nvm install stable
 # Switch to the installed version
 nvm use node
-# # Use the stable version of node by default
-nvm alias default node
+# Use the stable version of node by default
+# nvm alias default node
 
 bot "Installing a stable version of python..."
 # Installing python 2
@@ -260,7 +228,7 @@ pyenv install 2.7.12
 # Installing Python 3
 ok
 bot "Installing the dev version of python 3 & miniconda..."
-pyenv install 3.5.
+pyenv install 3.5.2
 pyenv install miniconda-latest
 ok
 # Setting python 3 globally
@@ -269,15 +237,24 @@ pyenv global miniconda-latest
 easy_install pip
 source ~/.profile
 
-mkvirtualenv <Test>
-workon <Test>
-source deactivate
-
 running "cleanup homebrew"
 brew cleanup > /dev/null 2>&1
 ok
 
-sh ./macos/osx-defaults.sh
+bot "I'm going to install some resonable [macos] defaults (General system UI, Standard System Changes.., etc). "
+
+read -r -p "Would you like me to do this? [y|N] " osresponse
+if [[ $osresponse =~ ^(y|yes|Y) ]];then
+    ok "will install some resonable [macos] defaults."
+else
+    ok "will skip installing some resonable [macos] defaults.";
+fi
+
+if [[ $osresponse =~ ^(y|yes|Y) ]];then
+bash ./macos/osx-defaults.sh
+else
+    ok "Skipped installing some resonable [macos] defaults.";
+fi
 
 ###############################################################################
 # Kill affected applications                                                  #

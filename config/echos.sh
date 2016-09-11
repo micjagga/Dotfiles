@@ -15,7 +15,7 @@ COL_MAGENTA=$ESC_SEQ"35;01m"
 COL_CYAN=$ESC_SEQ"36;01m"
 
 function ok() {
-    echo -e "$COL_GREEN[ok]$COL_RESET "$1
+    echo -e "$COL_GREEN[DONE]$COL_RESET "$1
 }
 
 function bot() {
@@ -50,6 +50,8 @@ function awesome_header() {
     echo -en "\n$COL_GREEN  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓$COL_RESET"
     echo -en "\n$COL_GREEN  ░▓ Software Installation, Configuration and Preferences for OS ▓$COL_RESET"
     echo -en "\n$COL_GREEN  ░▓ https://github.com/micjagga/dotfiles                        ▓$COL_RESET"
+    echo -en "\n$COL_GREEN  ░▓ Enoc Leonrd - http://leonrdenoc.me                          ▓$COL_RESET"
+    echo -en "\n$COL_GREEN  ░▓ For more help add -h or --help to install script            ▓$COL_RESET"
     echo -en "\n$COL_GREEN  ░▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓$COL_RESET"
     echo -en "\n"
 }

@@ -14,7 +14,6 @@ HELP
 exit; fi
 
 awesome_header
-bot 'Dotfiles - "Temper" Enoc Leonrd - http://leonrdenoc.me/'
 
 fullname=$(osascript -e "long user name of (system info)")
 
@@ -51,23 +50,23 @@ if [[ $response =~ (yes|y|Y) ]];then
    fi
 fi
 
-print_error() {
-  # Print output in red
-  printf "\e[0;31m  [✖] $1 $2\e[0m\n"
-}
+# print_error() {
+#   # Print output in red
+#   printf "\e[0;31m  [✖] $1 $2\e[0m\n"
+# }
 
-print_result() {
-  [ $1 -eq 0 ] \
-    && print_success "$2" \
-    || print_error "$2"
+# print_result() {
+#   [ $1 -eq 0 ] \
+#     && print_success "$2" \
+#     || print_error "$2"
 
-  [ "$3" == "true" ] && [ $1 -ne 0 ] \
-    && exit
-}
-print_success() {
-  # Print output in green
-  printf "\e[0;32m  [✔] $1\e[0m\n"
-}
+#   [ "$3" == "true" ] && [ $1 -ne 0 ] \
+#     && exit
+# }
+# print_success() {
+#   # Print output in green
+#   printf "\e[0;32m  [✔] $1\e[0m\n"
+# }
 
 ##############################################################################
 # XCode Command Line Tools                                                    #
@@ -107,8 +106,6 @@ sudo xcodebuild -license
 bot 'Agree with the XCode Command Line Tools licence'
 
 bot "OK, let's roll..."
-
-
 bot "Woot! All done. If you want to go further, here are some options:"
 
 read -r -p "install extra development command-line tools? (node, curl, etc) [y|N] " cli_response
@@ -118,6 +115,7 @@ else
     ok "will skip command-line tools.";
 fi
 bot "Creating missing Site & Developer directories for your development"
+
 read -r -p "create development folder structure (~/Development/sites)? [y|N] " dev_folder_response
 if [[ $dev_folder_response =~ ^(y|yes|Y) ]];then
     ok "will create the folder structure."
@@ -138,15 +136,23 @@ else
     ok "skipped development folder structure.";
 fi
 
-bot "I'm going to install some tooling and tweak your system settings. Here I go..."
+bot "I'm going to install some tooling and tweak your system settings. "
+
+read -r -p "Would you like me to do this? [y|N] " toolresponse
+if [[ $toolresponse =~ ^(y|yes|Y) ]];then
+    ok "will tweak your system setting with better defaults."
+else
+    ok "will skip tweaking your system setting with better defaults.";
+fi
+
+if [[ $toolresponse =~ ^(y|yes|Y) ]];then
 bash ./install.sh
+else
+    ok "Skipped tweaking your system setting with better defaults.";
+fi
 
-
-
-
-
-# bot "Here are the most useful resources. Have fun!"
-# running "OSX preferences for hackers: https://github.com/springload/dotfiles#osx-preferences"
-# running "Mac apps configuration with Mackup: https://github.com/springload/dotfiles#apps-configuration"
-# running "Dotfiles: https://github.com/springload/dotfiles#dotfiles"
+bot "Here are the most useful resources. Have fun!"
+running "OSX preferences for hackers: https://github.com/springload/dotfiles#osx-preferences"
+running "Mac apps configuration with Mackup: https://github.com/springload/dotfiles#apps-configuration"
+running "Dotfiles: https://github.com/springload/dotfiles#dotfiles"
 
