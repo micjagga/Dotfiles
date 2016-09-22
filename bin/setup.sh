@@ -124,7 +124,9 @@ if [[ $unixresponse =~ ^(y|yes|Y) ]];then
     require_brew cloc
 
     # Development tools
-    require_brew rbenv
+    #require_brew rbenv
+    require_brew ruby-install
+    require_brew chruby
     require_brew mysql
     require_brew sqlite3
     require_brew mongodb

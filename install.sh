@@ -274,7 +274,71 @@ else
     ok "Skipping python® setup.";
 fi
 
+bot "I'm going to set up Rubies® for your system... "
 
+read -r -p "Would you like me to do this? [y|N] " rubyresponse
+if [[ $rubyresponse =~ ^(y|yes|Y) ]];then
+    ok "will set up ruby® "
+else
+    ok "will skip ruby® setup.";
+fi
+
+if [[ $rubyresponse =~ ^(y|yes|Y) ]];then
+
+bot "Installing a stable version of Ruby..."
+action "Making ~/.rubies folder if it doesn't exist"
+mkdir ~/.rubies
+ok
+action "Getting list of latest version of ruby"
+bot "Installing latests versions of 1.9.3 and 2.0.0 and current latest"
+ruby-build 1.9.3-p551 -i ~/.rubies/1.9.3-p551
+ok
+ruby-build 2.0.0-p648  -i ~/.rubies/2.0.0-p648
+ok
+ruby-install --latest ruby
+ok
+bot "Setting default ruby to 2.0.0"
+echo "chruby 2.0.0" >> ~/.ruby-version
+ok
+source ~/.profile
+action "Installing Bundler for all versions of ruby"
+chruby 2.0.0
+gem install bundler
+ok
+chruby 2.3.1
+gem install bundler
+ok
+read -r -p "Would you like me to install pow? [y|N] " powresponse
+if [[ $powresponse =~ ^(y|yes|Y) ]];then
+    ok "will set up pow® "
+else
+    ok "will skip pow setup.";
+fi
+if [[ $powresponse =~ ^(y|yes|Y) ]];then
+curl get.pow.cx | sh
+ok
+bot "To set up a Rails or Rack app just symlink it to ~/.pow"
+action "=================================="
+bot "cd ~/.pow"
+bot "ln -s /path/to/myapp"
+action "=================================="
+fi
+ruby -v
+read -r -p "Would you like me to install Rails? [y|N] " railresponse
+if [[ $railresponse =~ ^(y|yes|Y) ]];then
+    ok "will set install and setup rails® "
+else
+    ok "will skip installing rails.";
+fi
+if [[ $railresponse =~ ^(y|yes|Y) ]];then
+    gem install rails
+    gem install mysql
+fi
+
+
+else
+    ok "Skipped setting up ruby®";
+fi
 
 running "cleanup homebrew"
 brew cleanup > /dev/null 2>&1
