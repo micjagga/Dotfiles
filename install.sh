@@ -84,11 +84,15 @@ if [[ $? = 0 ]]; then
 fi
 
 
-action "Setting up your Mac..." ok
+action "Setting up your Mac..."; ok
 action "initialisaing Home..."
+running "~/.home"
 mkdir -p ~/.home
+running "~/Documents/Temp"
 mkdir -p ~/Documents/Temp
+running "~/Documents/Code"
 mkdir -p ~/Documents/Code
+running "~/Documents/Temp/Scratch"
 mkdir -p ~/Documents/Temp/Scratch
 ok
 # install osx settings, app preferences
@@ -291,12 +295,12 @@ mkdir ~/.rubies
 ok
 action "Getting list of latest version of ruby"
 bot "Installing latests versions of 1.9.3 and 2.0.0 and current latest"
-ruby-build 1.9.3-p551 -i ~/.rubies/1.9.3-p551
-ok
-ruby-build 2.0.0-p648  -i ~/.rubies/2.0.0-p648
-ok
-ruby-install --latest ruby
-ok
+# ruby-build 1.9.3-p551 -i ~/.rubies/1.9.3-p551
+# ok
+# ruby-build 2.0.0-p648  -i ~/.rubies/2.0.0-p648
+# ok
+# ruby-install --latest ruby
+# ok
 bot "Setting default ruby to 2.0.0"
 echo "chruby 2.0.0" >> ~/.ruby-version
 ok
@@ -334,12 +338,9 @@ if [[ $railresponse =~ ^(y|yes|Y) ]];then
     gem install rails
     gem install mysql
 fi
-
-
 else
     ok "Skipped setting up ruby®";
 fi
-
 running "cleanup homebrew"
 brew cleanup > /dev/null 2>&1
 ok
