@@ -5,8 +5,8 @@
 #  - https://github.com/mathiasbynens/dotfiles/blob/master/.osx
 # ~/dotfiles/osx/set-defaults.sh — http://mths.be/osx
 #
-
 source ./config/echos.sh
+
 bot "Setting up macos defaults - Thanks to https://github.com/mathiasbynens/dotfiles/blob/master/.osx "
 
 COMPUTERNAME="Enoc Leonrd's MBP"
@@ -21,10 +21,9 @@ if sudo grep -q "# %wheel\tALL=(ALL) NOPASSWD: ALL" "/etc/sudoers"; then
 # Ask for the administrator password upfront
 bot "I need you to enter your sudo password so I can install some things:"
 sudo -v
-
 # Keep-alive: update existing sudo time stamp until the script has finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null
-
+fi
 
 ###############################################################################
 bot "Configuring General System UI/UX..."

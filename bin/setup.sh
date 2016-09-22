@@ -50,6 +50,8 @@ ok
 running " \xF0\x9f\x8d\xba  brewing your packages..." ok
 running " \xF0\x9f\x8d\xba  casking your applications..." ok
 
+# Disable Analytics sent to google
+brew analytics off
 # Ensure brew works well
 brew doctor
 

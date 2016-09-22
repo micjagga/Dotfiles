@@ -49,25 +49,6 @@ if [[ $response =~ (yes|y|Y) ]];then
     bot "You can now run sudo commands without password!"
    fi
 fi
-
-# print_error() {
-#   # Print output in red
-#   printf "\e[0;31m  [✖] $1 $2\e[0m\n"
-# }
-
-# print_result() {
-#   [ $1 -eq 0 ] \
-#     && print_success "$2" \
-#     || print_error "$2"
-
-#   [ "$3" == "true" ] && [ $1 -ne 0 ] \
-#     && exit
-# }
-# print_success() {
-#   # Print output in green
-#   printf "\e[0;32m  [✔] $1\e[0m\n"
-# }
-
 ##############################################################################
 # XCode Command Line Tools                                                    #
 ###############################################################################
@@ -146,7 +127,7 @@ else
 fi
 
 if [[ $toolresponse =~ ^(y|yes|Y) ]];then
-bash ./install.sh
+bash ./install.sh;
 else
     ok "Skipped tweaking your system setting with better defaults.";
 fi

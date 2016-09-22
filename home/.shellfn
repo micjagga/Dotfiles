@@ -143,6 +143,6 @@ function dockershell () {
 }
 
 # define a "global pip" function to use outside virtualenv:
-gpip(){
-    PIP_REQUIRE_VIRTUALENV="" pip "$@"
-}
+# gpip(){
+#    PIP_REQUIRE_VIRTUALENV="" pip "$@"
+# }

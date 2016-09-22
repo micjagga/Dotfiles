@@ -213,29 +213,67 @@ echo "0 6 * * *  npm update -g" >> mycron
 crontab mycron
 rm mycron
 
+bot "I'm going to set up node® for your system... "
+
+read -r -p "Would you like me to do this? [y|N] " noderesponse
+if [[ $noderesponse =~ ^(y|yes|Y) ]];then
+    ok "will set up node® "
+else
+    ok "will skip node® setup.";
+fi
+
+if [[ $noderesponse =~ ^(y|yes|Y) ]];then
+
 bot "Installing a stable version of Node..."
 sourceNVM
 # Install the latest stable version of node
 nvm install stable
 # Switch to the installed version
-nvm use node
+# nvm use node
 # Use the stable version of node by default
-# nvm alias default node
+ nvm alias default node
+else
+    ok "Skipped setting up node®";
+fi
 
-bot "Installing a stable version of python..."
-# Installing python 2
-pyenv install 2.7.12
-# Installing Python 3
-ok
-bot "Installing the dev version of python 3 & miniconda..."
-pyenv install 3.5.2
-pyenv install miniconda-latest
-ok
-# Setting python 3 globally
-pyenv global miniconda-latest
-# update pip
-easy_install pip
-source ~/.profile
+bot "I'm going to set up python® for your system...python® 3 is set as default you can change this with pyenv.. "
+
+read -r -p "Would you like me to do this? [y|N] " pyresponse
+if [[ $pyresponse =~ ^(y|yes|Y) ]];then
+    ok "will set up python® "
+else
+    ok "will skip setting up python®";
+fi
+
+
+if [[ $pyresponse =~ ^(y|yes|Y) ]];then
+    bot "Installing a stable version of python..."
+    bot "Installing the dev version of python 3 & miniconda..."
+    pyenv install 3.5.2
+    pyenv install miniconda-latest
+    ok
+action "Setting python 3 -miniconda globally"
+    pyenv global miniconda-latest
+
+action 'updating pip'
+    easy_install pip
+    source ~/.profile
+
+read -r -p "Would you like me to install python 2 [y|N] " py2response
+if [[ $py2response =~ ^(y|yes|Y) ]];then
+    ok "will install python® 2 "
+    # Installing python 2
+    pyenv install 2.7.12
+    ok
+else
+    ok "Skipped installing python® 2";
+fi
+
+else
+    ok "Skipping python® setup.";
+fi
+
+
 
 running "cleanup homebrew"
 brew cleanup > /dev/null 2>&1
@@ -300,3 +338,4 @@ then
 else
  exit 1
 fi
+
