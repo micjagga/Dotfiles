@@ -210,6 +210,10 @@ if [[ $atomresponse =~ ^(y|yes|Y) ]];then
     running "Installing Atom community packages"
     apm list --installed # --bare  - get a list of installed packages
     apm install --packages-file ~/.atom/packages.list; ok
+    require_apm linter-flake8
+    require_apm linter-pep8
+    require_apm autocomplete-python
+    require_apm django-templates
 else
     ok "skipped Installing Atom Community Packages.";
 fi
