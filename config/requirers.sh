@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
-
-###
-# convienience methods for requiring installed software
-# @author Adam Eivy
-###
-
+# =====================================================================================
+# some convienience methods for requiring installed software
+# Thanks to Adam Eivy https://github.com/atomantic/dotfiles
+# ======================================================================================
 source ./config/echos.sh
 
 function require_cask() {

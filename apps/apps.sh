@@ -1,45 +1,53 @@
 #!/usr/bin/env bash
 
-# include my library helpers for colorized echo and require_brew, etc
+# =============================================================================
+# This script installs GUI Applications and other useful
+# utilities used by developers.
+# The script also sets up a few applications.
+# Should be customised to fit your requirements
+# The script is made up of daily use applications,
+# designer applications, developer tools, quicklook plugins
+# and other useful utilities like vpn etc.
+# =============================================================================
+
+
+# some colorized echo helpers
+# Thanks to Adam Eivy https://github.com/atomantic/dotfiles
 source ./config/echos.sh
 
-###############################################################################
-#Install GUI tools using Homebrew                                             #
-###############################################################################
+bot "Initialise Application Tools™"
+bot "Set up buxbot (better defaults)™"
 
-bot "Initialising Application Tools™"
-bot "Setting up buxbot (better defaults)™"
-
-read -r -p "install default daily tools? (Browsers, Slack, etc) [y|N] " dailyresponse
-if [[ $dailyresponse =~ ^(y|yes|Y) ]];then
+read -r -p "install default tools for everyday use? (Browsers, Slack, etc) [y|N] " d_response
+if [[ $d_response =~ ^(y|yes|Y) ]];then
     ok "will install everyday tools."
 else
     ok "will skip everyday tools.";
 fi
 
-read -r -p "install the designer tools? (Dropbox, Sketch, etc) [y|N] " designerresponse
-if [[ $designerresponse =~ ^(y|yes|Y) ]];then
+read -r -p "install designer tools? (Dropbox, Sketch, etc) [y|N] " ds_response
+if [[ $ds_response =~ ^(y|yes|Y) ]];then
     ok "will install designer tools."
 else
     ok "will skip designer tools.";
 fi
 
-read -r -p "install the developer tools? (iTerm, Sublime Text, etc) [y|N] " developerresponse
-if [[ $developerresponse =~ ^(y|yes|Y) ]];then
+read -r -p "install developer tools? (iTerm, Sublime Text, etc) [y|N] " dv_response
+if [[ $dv_response =~ ^(y|yes|Y) ]];then
     ok "will install developer tools."
 else
     ok "will skip developer tools.";
 fi
 
-read -r -p "install the Quicklook plugins? [y|N] " quicklookresponse
-if [[ $quicklookresponse =~ ^(y|yes|Y) ]];then
+read -r -p "install Quicklook plugins? [y|N] " ql_response
+if [[ $qlresponse =~ ^(y|yes|Y) ]];then
     ok "will install Quicklook plugins."
 else
     ok "will skip Quicklook plugins.";
 fi
 
-read -r -p "install other useful Utility tools? (flux, Cdock, duet, displayLink etc) [y|N] " utilresponse
-if [[ $utilresponse =~ ^(y|yes|Y) ]];then
+read -r -p "install other useful Utility tools? (flux, Cdock, duet, displayLink etc) [y|N] " u_response
+if [[ $u_response =~ ^(y|yes|Y) ]];then
     ok "will install Utility tools."
 else
     ok "will skip Utility tools.";
@@ -47,15 +55,12 @@ fi
 
 bot "Let's go! Make sure to check on your computer regularly in case something needs your password."
 
-if [[ $everydayresponse =~ ^(y|yes|Y) ]];then
+if [[ $d_response =~ ^(y|yes|Y) ]];then
     action "install brew cask packages..."
-
     require_cask firefox
     require_cask google-chrome
-
     require_cask google-drive
     require_cask avast
-
     require_cask alfred
     require_cask skype
     # require_cask google-hangouts
@@ -68,7 +73,6 @@ if [[ $everydayresponse =~ ^(y|yes|Y) ]];then
     require_cask transmission
     require_cask typora
     require_cask microsoft-office
-    require_cask raindrop
     require_cask notion
 
     ok "Music Players, Messangers, Utility Apps, Browsers etc. All set!"
@@ -77,25 +81,22 @@ else
     ok "skipped everyday tools.";
 fi
 
-if [[ $designerresponse =~ ^(y|yes|Y) ]];then
+if [[ $ds_response =~ ^(y|yes|Y) ]];then
 
     action "install brew cask packages..."
-
     require_cask dropbox
     require_cask sketch
     require_cask skyfonts
     # require_cask adobe-creative-cloud
-
-
+    ok "Dropbox, Sketch etc. All set!"
     ok "casks installed..."
 else
     ok "skipped designer tools.";
 fi
 
-if [[ $developerresponse =~ ^(y|yes|Y) ]];then
+if [[ $dv_response =~ ^(y|yes|Y) ]];then
 
     action "install brew cask packages..."
-
     require_cask intellij-idea
     require_cask pycharm
     require_cask atom
@@ -107,7 +108,6 @@ if [[ $developerresponse =~ ^(y|yes|Y) ]];then
     require_cask datagrip
     require_cask dash
     # require_cask opera
-
     require_cask iterm2
     require_cask vagrant
     require_cask virtualbox
@@ -117,7 +117,6 @@ if [[ $developerresponse =~ ^(y|yes|Y) ]];then
     require_cask sourcetree
     require_cask imagealpha
     require_cask imageoptim
-
     require_cask querious
     require_cask kaleidoscope
     # require_cask pgadmin3
@@ -128,10 +127,9 @@ else
     ok "skipped developer tools.";
 fi
 
-if [[ $quicklookresponse =~ ^(y|yes|Y) ]];then
+if [[ $ql_response =~ ^(y|yes|Y) ]];then
 
     action "install brew cask packages..."
-
     require_cask qlcolorcode
     require_cask qlstephen
     require_cask qlmarkdown
@@ -148,10 +146,9 @@ else
     ok "skipped Quicklook plugins";
 fi
 
-if [[ $utilresponse =~ ^(y|yes|Y) ]];then
+if [[ $u_response =~ ^(y|yes|Y) ]];then
 
     action "install brew cask packages..."
-
     require_cask flux
     require_cask raindrop
     require_cask tunnelbear
@@ -172,10 +169,13 @@ if [[ $utilresponse =~ ^(y|yes|Y) ]];then
 else
     ok "skipped Utility tools.";
 fi
+
+
+# ================================================================================
 # Setup applications
-###############################################################################
+# ===============================================================================
 bot "Setting Up Applications..."
-###############################################################################
+
 read -r -p "would you like to install a few Atom community packages? [y|N] " atomresponse
 if [[ $atomresponse =~ ^(y|yes|Y) ]];then
     ok "will install atom packages."
@@ -202,7 +202,7 @@ if [[ $atomresponse =~ ^(y|yes|Y) ]];then
     action "install atom community packages..."
     action 'Symlinking Atom to [~/]'
     running "Copying Atom settings.."
-   mv  -f ~/.atom ~/.dotfiles_backup/
+    mv  -f ~/.atom ~/.dotfiles_backup/
     ln -s ./apps/atom ~/.atom; ok
 
     running "Copying over Atom packages"

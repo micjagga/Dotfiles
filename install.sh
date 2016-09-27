@@ -2,9 +2,11 @@
 source ./config/echos.sh
 source ./config/requirers.sh
 
-# ###########################
-# This script installs the dotfiles and symlink better system defaults to the system
-# ###########################
+# ============================================================================================
+# This is the main install script.
+# This script installs the dotfiles and symlinks better system defaults to the system.
+#
+# =============================================================================================
 
 # Warn user this script will overwrite current dotfiles
 while true; do
@@ -16,6 +18,7 @@ while true; do
   esac
 done
 
+# Initial Github configuration
 grep 'user = GITHUBUSER' ./git/.gitconfig > /dev/null 2>&1
 if [[ $? = 0 ]]; then
     read -r -p "What is your github.com username? " githubuser
@@ -95,6 +98,7 @@ mkdir -p ~/Documents/Code
 running "~/Documents/Temp/Scratch"
 mkdir -p ~/Documents/Temp/Scratch
 ok
+
 # install osx settings, app preferences
 read -r -p "would you like to install [macos] applications, apps preferences and better app defaults? [y|N] " appresponse
 if [[ $appresponse =~ ^(y|yes|Y) ]];then
@@ -103,17 +107,18 @@ else
     ok "will skip install of [macos] applications, apps preferences and better app defaults";
 fi
 
-if [[ $appresponse =~ ^(y|yes|Y) ]];then
-source ./apps/apps.sh
-else
-    ok "skipped Installing [macos] applications, apps preferences and better app defaults.";
-fi
-
 read -r -p "would you like to fixed width and powerline-fonts? [y|N] " fontresponse
 if [[ $fontresponse =~ ^(y|yes|Y) ]];then
     ok "will install fixed width and powerline-fonts "
 else
     ok "will skip install of fixed width and powerline-fonts";
+fi
+
+
+if [[ $appresponse =~ ^(y|yes|Y) ]];then
+source ./apps/apps.sh
+else
+    ok "skipped Installing [macos] applications, apps preferences and better app defaults.";
 fi
 
 if [[ $fontresponse =~ ^(y|yes|Y) ]];then
@@ -294,13 +299,11 @@ action "Making ~/.rubies folder if it doesn't exist"
 mkdir ~/.rubies
 ok
 action "Getting list of latest version of ruby"
-bot "Installing latests versions of 1.9.3 and 2.0.0 and current latest"
-# ruby-build 1.9.3-p551 -i ~/.rubies/1.9.3-p551
-# ok
-# ruby-build 2.0.0-p648  -i ~/.rubies/2.0.0-p648
-# ok
-# ruby-install --latest ruby
-# ok
+bot "Installing latests versions of 2.0.0 and current latest"
+ruby-build 2.0.0-p648  -i ~/.rubies/2.0.0-p648
+ok
+ruby-install --latest ruby
+ok
 bot "Setting default ruby to 2.0.0"
 echo "chruby 2.0.0" >> ~/.ruby-version
 ok
@@ -321,12 +324,14 @@ fi
 if [[ $powresponse =~ ^(y|yes|Y) ]];then
 curl get.pow.cx | sh
 ok
+
 bot "To set up a Rails or Rack app just symlink it to ~/.pow"
 action "=================================="
 bot "cd ~/.pow"
 bot "ln -s /path/to/myapp"
 action "=================================="
 fi
+
 ruby -v
 read -r -p "Would you like me to install Rails? [y|N] " railresponse
 if [[ $railresponse =~ ^(y|yes|Y) ]];then
@@ -335,12 +340,16 @@ else
     ok "will skip installing rails.";
 fi
 if [[ $railresponse =~ ^(y|yes|Y) ]];then
-    gem install rails
-    gem install mysql
+    require_gem rails
+    require_gem mysql
+    ok "Rails has been installed"
+else
+    ok "Skipped rails installation®";
 fi
 else
     ok "Skipped setting up ruby®";
 fi
+
 running "cleanup homebrew"
 brew cleanup > /dev/null 2>&1
 ok

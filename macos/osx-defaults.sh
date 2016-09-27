@@ -1,10 +1,10 @@
 #!/bin/bash
-#
+# ======================================================================================
 # Reasonably sets OS X defaults. My sources:
 #  - https://github.com/skwp/dotfiles/blob/master/bin/osx
 #  - https://github.com/mathiasbynens/dotfiles/blob/master/.osx
 # ~/dotfiles/osx/set-defaults.sh — http://mths.be/osx
-#
+# =========================================================================================
 source ./config/echos.sh
 
 bot "Setting up macos defaults - Thanks to https://github.com/mathiasbynens/dotfiles/blob/master/.osx "

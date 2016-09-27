@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
-###
+
+# =====================================================================================
 # some colorized echo helpers
- #Thanks to Adam Eivy https://github.com/atomantic/dotfiles
-###
+# Thanks to Adam Eivy https://github.com/atomantic/dotfiles
+# ======================================================================================
 
 # Colors
 ESC_SEQ="\x1b["

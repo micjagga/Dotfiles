@@ -1,10 +1,16 @@
 #!/usr/bin/env bash
+
+# ===========================================================================================
+# This script handles system binaries and other important CLI packages like homebrew, bash,
+# zsh etc.
+# ============================================================================================
+
 source ./config/echos.sh
 source ./config/requirers.sh
 
-###########################################
+# ==========================================================================================
 # install homebrew (CLI Packages)
-############################################
+# ==========================================================================================
 running "checking homebrew install"
 brew_bin=$(which brew) 2>&1 > /dev/null
 if [[ $? != 0 ]]; then
@@ -32,9 +38,9 @@ else
   fi
 fi
 
-############################################################
+# ==========================================================
 # install brew cask (UI Packages)
-###########################################################
+# ===========================================================
 running "checking brew-cask install" ok
 output=$(brew tap | grep cask)
 if [[ $? != 0 ]]; then
@@ -56,9 +62,9 @@ brew analytics off
 brew doctor
 
 
-###############################################################################
-#Install CLI tools using Homebrew                                             #
-###############################################################################
+# ============================================================================
+#Install CLI tools using Homebrew
+# =============================================================================
 
 bot "installing command-line tools"
 
@@ -85,7 +91,6 @@ fi
 
 if [[ $unixresponse =~ ^(y|yes|Y) ]];then
     action "install brew packages..."
-
     # Install GNU core utilities (those that come with OS X are outdated)
     require_brew coreutils
     require_brew moreutils
@@ -112,11 +117,9 @@ if [[ $unixresponse =~ ^(y|yes|Y) ]];then
     require_brew trash
     require_brew fasd
     require_brew svn
-
     require_brew wget --enable-iri
     require_brew curl
     require_brew vim --override-system-vi
-
     require_brew nano
     require_brew whois
     require_brew unzip
@@ -124,7 +127,6 @@ if [[ $unixresponse =~ ^(y|yes|Y) ]];then
     require_brew cloc
 
     # Development tools
-    #require_brew rbenv
     require_brew ruby-install
     require_brew chruby
     require_brew mysql
@@ -135,7 +137,7 @@ if [[ $unixresponse =~ ^(y|yes|Y) ]];then
     require_brew screen
     require_brew mysql
     require_brew fontconfig
-    require_brew fortune
+   #  require_brew fortune
 
     ok "packages installed..."
 else
@@ -144,22 +146,26 @@ fi
 
 if [[ $runtimesresponse =~ ^(y|yes|Y) ]];then
     action "install brew packages..."
-
-    require_brew node
-    require_brew ruby
+    # require_brew node
+    # require_brew ruby
     require_brew nvm
-    require_brew python
+    require_brew pyenv
+    require pyenv-virtualenv
+    require_brew pyenv-virtualenvwrapper
+    # require_brew python
     # require_brew python3
 
     ok "packages installed..."
-
 else
     ok "skipped runtimes.";
 fi
 
+    # To list globally installed npm packages and version: npm list -g --depth=0
+    # diff-so-fancy — sexy git diffs
+    # git-recent — Type `git recent` to see your recent local git branches
+    # git-open — Type `git open` to open the GitHub page or website for a repository
 if [[ $packagesresponse =~ ^(y|yes|Y) ]];then
     action "install npm / gem / pip packages..."
-
     require_npm bower
     require_npm browser-sync
     require_npm browserify
@@ -182,28 +188,14 @@ if [[ $packagesresponse =~ ^(y|yes|Y) ]];then
     require_npm flow-typed
     require_npm servedir
     require_npm npm-check-updates
-
-    # Globally install with npm
-    # To list globally installed npm packages and version: npm list -g --depth=0
-    #
-    # Some descriptions:
-    #
-    # diff-so-fancy — sexy git diffs
-    # git-recent — Type `git recent` to see your recent local git branches
-    # git-open — Type `git open` to open the GitHub page or website for a repository
     require_npm diff-so-fancy
     require_npm git-recent
     require_npm git-open
     require_npm http-server
-
     require_gem bundler
     require_gem rake
     require_gem sass
     require_gem scss-lint
-
-    require_brew pyenv
-    require pyenv-virtualenv
-    require_brew pyenv-virtualenvwrapper
     require_pip requests
     require_pip beautifulsoup
     require_pip pillow
@@ -212,13 +204,15 @@ if [[ $packagesresponse =~ ^(y|yes|Y) ]];then
     require_pip flask
     require_pip flake8
     require_pip flake8-docstrings
-
     require_apm linter-flake8
     ok "packages installed..."
 else
     ok "skipped packages."
 fi
-# Copy binaries
+# ===========================================================================================
+# Symlink binaries
+# ===========================================================================================
+
 ln -fs ./bin ~/
 
 declare -a BINARIES=(

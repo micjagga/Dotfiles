@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# Thanks to Adam Eivy https://github.com/atomantic/dotfiles
 source ./config/echos.sh
 source ./config/requirers.sh
 
@@ -132,8 +133,4 @@ else
     ok "Skipped tweaking your system setting with better defaults.";
 fi
 
-bot "Here are the most useful resources. Have fun!"
-running "OSX preferences for hackers: https://github.com/springload/dotfiles#osx-preferences"
-running "Mac apps configuration with Mackup: https://github.com/springload/dotfiles#apps-configuration"
-running "Dotfiles: https://github.com/springload/dotfiles#dotfiles"
-
+bot "All done. Have fun!"

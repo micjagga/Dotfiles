@@ -1,5 +1,13 @@
 #!/bin/sh
+# =======================================================================================
+# This Script installs fixed width  and powerline fonts(Patched) for developments
+# You can select the ones you need and take out the rest.
+# ========================================================================================
+
+# some colorized echo helpers
+# Thanks to Adam Eivy https://github.com/atomantic/dotfiles
 source ./configurations/bot/echos.sh
+
 
 bot "Installing fonts..."
 brew tap caskroom/fonts

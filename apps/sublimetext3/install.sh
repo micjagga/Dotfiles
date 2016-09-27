@@ -1,7 +1,15 @@
 #!/bin/sh
 source ./config/echos.sh
+# ========================================================================================
+# This script handles the sublime text editor.
+# Better defaults/preferences are symlinked also,
+# package control is installed automatically as well as other indispensible sublime packages
+# ===========================================================================================
 
+# =========================================================================================
 bot "Setting up Sublime Text 3..."
+# ==========================================================================================
+
 running "Ensuring library directory exists..."
 mkdir -p ~/Library/Application\ Support/Sublime\ Text\ 3/Packages
 mkdir -p ~/Library/Application\ Support/Sublime\ Text\ 3/Installed\ Packages
