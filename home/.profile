@@ -11,8 +11,12 @@ source ~/.shellaliases
 #source ~/Dropbox/Private/Boxes/osx/.shellaliases
 
 if [ -d $HOME/.dotfiles/zsh/ ]; then
-  if [ "$(ls -A $HOME/.dotfiles/zsh/)" ]; then
-    for config_file in ($HOME/.dotfiles/zsh/*.zsh) source $config_file
+  if [ "$(ls -A $HOME/.dotfiles/zsh/)" ] then
+    for config_file ($HOME/.dotfiles/zsh/*.zsh)
+      echo $config_file
+      source $config_file
+      read throwaway\?"Press return for next file"
+    done
   fi
 fi
 
