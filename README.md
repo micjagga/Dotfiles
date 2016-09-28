@@ -21,12 +21,13 @@ cd ~/.dotfiles; chmod +x install.sh
 
 Alternatively, you can install this into ~/.dotfiles remotely without Git using curl:
 
+```zsh
 sh -c "`curl -fsSL https://raw.github.com/micjagga/dotfiles/master/remote-setup.sh`"
 
 Or, using wget:
 
 sh -c "`wget -O - --no-check-certificate https://raw.githubusercontent.com/micjagga/dotfiles/master/remote-setup.sh`"
-
+```
 
 ### Dotfiles.todo
 - [x] ~~sort out git aliases from `.gitconfig` and `aliases.zsh`~~ @todo
