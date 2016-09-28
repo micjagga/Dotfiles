@@ -12,7 +12,7 @@ You only need a to follow a few basic install options and you’re good to go. I
 
 ```zsh
 # Clone the repository,
-git clone --recursive https://github.com/micjagga/b-dotfiles.git  ~/.dotfiles
+git clone --recursive https://github.com/micjagga/Dotfiles.git  ~/.dotfiles
 # Give permisions and enter dotfiles directory
 cd ~/.dotfiles; chmod +x install.sh
 # Run the shell script
