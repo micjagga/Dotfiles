@@ -10,10 +10,10 @@ source ~/.shellaliases
 # Private/Proprietary shell aliases (not to be checked into the public repo) :)
 #source ~/Dropbox/Private/Boxes/osx/.shellaliases
 
-for config_file ($HOME/.dotfiles/**/*.zsh); do
-  echo $config_file
-  source $config_file
-  read throwaway\?"Press return for next file"
-done
+if [ -d $HOME/.dotfiles/zsh/ ]; then
+  if [ "$(ls -A $HOME/.dotfiles/zsh/)" ]; then
+    for config_file in ($HOME/.dotfiles/zsh/*.zsh) source $config_file
+  fi
+fi
 
 
