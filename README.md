@@ -8,6 +8,24 @@ I will set-up your OSX machine with Better™ system defaults, preferences, soft
 
 You only need a to follow a few basic install options and you’re good to go. I can work with a brand-new system from the factory as well as an existing machine that you've been working with for years.
 
+## Installation
+
+```zsh
+# Clone the repository,
+git clone --recursive https://github.com/micjagga/b-dotfiles.git  ~/.dotfiles
+# Give permisions and enter dotfiles directory
+cd ~/.dotfiles; chmod +x install.sh
+# Run the shell script
+./install.sh
+```
+
+Alternatively, you can install this into ~/.dotfiles remotely without Git using curl:
+
+sh -c "`curl -fsSL https://raw.github.com/micjagga/dotfiles/master/remote-setup.sh`"
+Or, using wget:
+sh -c "`wget -O - --no-check-certificate https://raw.githubusercontent.com/micjagga/dotfiles/master/remote-setup.sh`"
+
+
 ### Dotfiles.todo
 - [x] ~~sort out git aliases from `.gitconfig` and `aliases.zsh`~~ @todo
 - [ ]  leave `vim` & `vimrc` for last @low
@@ -37,18 +55,6 @@ You only need a to follow a few basic install options and you’re good to go. I
 -  Write out documentation @p7
 - ~~Look into paul millir’s git extras & git templates @now and his OS X setup file.~~ @im @done(2016-07-15)
 - create a nice theme for prezto @high @todo
-
-## Installation
-
-```zsh
-# Clone the repository,
-git clone --recursive https://github.com/micjagga/b-dotfiles.git  ~/.dotfiles
-# Give permisions and enter dotfiles directory
-cd ~/.dotfiles; chmod +x install.sh
-# Run the shell script
-./install.sh
-```
-
 
 ## Acknowledgements
 
