@@ -202,8 +202,7 @@ popd > /dev/null 2>&1
 
 action "Overriding prezto ~/.zpreztorc with custom zpreztorc to enable additional modules..."
 ln -nfs ~/.dotfiles/zsh/zpreztorc  ${ZDOTDIR:-$HOME}/.zpreztorc
-action 'activating zsh enhancements'
-echo 'for config_file ($HOME/.dotfiles/zsh/*.zsh) source $config_file ' >> ~/.zshrc  ok
+
 # Symlink online-check.sh
 ln -fs ./config/online-check.sh  ~/online-check.sh
 
@@ -266,8 +265,7 @@ action "Setting python 3 -miniconda globally"
 
 action 'updating pip'
     easy_install pip
-    source ~/.profile
-    mkvirtualenv TestEnv
+
 
 read -r -p "Would you like me to install python 2 [y|N] " py2response
 if [[ $py2response =~ ^(y|yes|Y) ]];then
@@ -304,14 +302,13 @@ bot "Installing latests versions of 2.0.0 and current latest"
 # ok
 # ruby-install --latest ruby
 ok
-bot "Setting default ruby to 2.0.0"
-echo "chruby 2.0.0" >> ~/home/.ruby-version
+bot "Setting default ruby to 2.3.1"
+echo "chruby 2.3.1" >> ~/.ruby-version
 ok
-source ~/.profile
+
 action "Installing Bundler for all versions of ruby"
-chruby 2.0.0
-gem install bundler
-ok
+
+source /usr/local/share/chruby/chruby.sh
 chruby 2.3.1
 gem install bundler
 ok
