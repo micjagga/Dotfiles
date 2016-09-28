@@ -1,3 +1,6 @@
+# This is Still a work in progress
+    Please be sure of what you are doing before installing this. I take no responsibity if you damage you system.
+
 ## What Is This?
 
 A repository for setting up and maintaining  an OSX machine. With technological advances and bleeding edge technology, This project aims to help adapt an OSX machine to theses changes. This is an opinionated setup for development on an OSX environment.  Feel free to explore, learn and copy parts for your own dotfiles. Enjoy! :smile:

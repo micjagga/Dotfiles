@@ -167,7 +167,7 @@ for file in .*; do
   # symlink might still exist
   unlink ~/$file > /dev/null 2>&1
   # create the link
-  ln -s ~/.dotfiles/shell/$file ~/$file
+  ln -s ~/.dotfiles/home/$file ~/$file
   echo -en '\tlinked';ok
 done
 popd > /dev/null 2>&1
@@ -267,7 +267,9 @@ action "Setting python 3 -miniconda globally"
 action 'updating pip'
     easy_install pip
     source ~/.profile
-mkvirtualenv TestEnv
+    eval "$(pyenv init -)"
+    eval $(pyenv virtualenv-init -)
+    mkvirtualenv TestEnv
 
 read -r -p "Would you like me to install python 2 [y|N] " py2response
 if [[ $py2response =~ ^(y|yes|Y) ]];then
@@ -300,12 +302,12 @@ mkdir ~/.rubies
 ok
 action "Getting list of latest version of ruby"
 bot "Installing latests versions of 2.0.0 and current latest"
-ruby-build 2.0.0-p648  -i ~/.rubies/2.0.0-p648
-ok
-ruby-install --latest ruby
+# ruby-build 2.0.0-p648  -i ~/.rubies/2.0.0-p648
+# ok
+# ruby-install --latest ruby
 ok
 bot "Setting default ruby to 2.0.0"
-echo "chruby 2.0.0" >> ~/.ruby-version
+echo "chruby 2.0.0" >> ~/home/.ruby-version
 ok
 source ~/.profile
 action "Installing Bundler for all versions of ruby"

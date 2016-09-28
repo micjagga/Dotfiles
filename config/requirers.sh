@@ -69,7 +69,9 @@ function sourceNVM(){
     source $(brew --prefix nvm)/nvm.sh
 }
 
-
+function sourcePYENV(){
+    source $(brew --prefix pyenv-virtualenvwrapper)/bin
+}
 function require_gem() {
         running "gem $1"
         if [[ $(gem list --local | grep "$1" | head -1 | cut -d' ' -f1) != "$1" ]];
