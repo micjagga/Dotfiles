@@ -150,7 +150,7 @@ if [[ $runtimesresponse =~ ^(y|yes|Y) ]];then
     # require_brew ruby
     require_brew nvm
     require_brew pyenv
-    require pyenv-virtualenv
+    require_brew pyenv-virtualenv
     require_brew pyenv-virtualenvwrapper
     # require_brew python
     # require_brew python3
