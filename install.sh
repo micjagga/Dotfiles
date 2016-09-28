@@ -267,8 +267,6 @@ action "Setting python 3 -miniconda globally"
 action 'updating pip'
     easy_install pip
     source ~/.profile
-    $(pyenv init -)
-    $(pyenv virtualenv-init -)
     mkvirtualenv TestEnv
 
 read -r -p "Would you like me to install python 2 [y|N] " py2response
