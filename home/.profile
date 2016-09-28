@@ -6,7 +6,7 @@ source ~/.shellvars
 source ~/.shellfn
 source ~/.shellpaths
 source ~/.shellaliases
-source ~/shell_config
+source ~/.shell_config
 
 # Private/Proprietary shell aliases (not to be checked into the public repo) :)
 #source ~/Dropbox/Private/Boxes/osx/.shellaliases
