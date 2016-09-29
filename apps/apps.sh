@@ -60,13 +60,13 @@ if [[ $d_response =~ ^(y|yes|Y) ]];then
     require_cask firefox
     require_cask google-chrome
     require_cask google-drive
-    require_cask avast
+    #require_cask avast
     require_cask alfred
     require_cask skype
     # require_cask google-hangouts
     require_cask slack
     require_cask harvest
-    require_cask vlc
+    #require_cask vlc
     require_cask fluid
     require_cask spotify
     require_cask steam

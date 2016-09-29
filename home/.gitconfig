@@ -36,7 +36,7 @@
   fontdiff = -family Monaco -size 10 -weight normal -slant roman -underline 0 -overstrike 0
 
 [core]
-  excludesfile = ~/.gitignore
+	excludesfile = /Users/leonrd/.gitignore
   quotepath = false
   # line endings
   # force LF during add
@@ -197,3 +197,9 @@
   clean = git-lfs clean %f
   smudge = git-lfs smudge %f
   required = true
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true

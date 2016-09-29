@@ -166,45 +166,45 @@ fi
     # git-open — Type `git open` to open the GitHub page or website for a repository
 if [[ $packagesresponse =~ ^(y|yes|Y) ]];then
     action "install npm / gem / pip packages..."
-    require_npm bower
-    require_npm browser-sync
-    require_npm browserify
-    require_npm webpack
-    require_npm nodemon
-    require_npm sass-lint
-    require_npm grunt
-    require_npm gulp
-    require_npm jscs
-    require_npm jshint
-    require_npm eslint
-    require_npm eslint-plugin-react
-    require_npm babel-eslint
-    require_npm hyperlink
-    require_npm csscomb
-    require_npm disc
-    require_npm svgo
-    require_npm yo
-    require_npm flow-bin
-    require_npm flow-typed
-    require_npm servedir
-    require_npm npm-check-updates
-    require_npm diff-so-fancy
-    require_npm git-recent
-    require_npm git-open
-    require_npm http-server
-    require_gem bundler
-    require_gem rake
-    require_gem sass
-    require_gem scss-lint
-    require_pip requests
-    require_pip beautifulsoup
-    require_pip pillow
-    require_pip sqlalchemy
-    require_pip pygments
-    require_pip flask
-    require_pip flake8
-    require_pip flake8-docstrings
-    require_apm linter-flake8
+    # require_npm bower
+    # require_npm browser-sync
+    # require_npm browserify
+    # require_npm webpack
+    # require_npm nodemon
+    # require_npm sass-lint
+    # require_npm grunt
+    # require_npm gulp
+    # require_npm jscs
+    # require_npm jshint
+    # require_npm eslint
+    # require_npm eslint-plugin-react
+    # require_npm babel-eslint
+    # require_npm hyperlink
+    # require_npm csscomb
+    # require_npm disc
+    # require_npm svgo
+    # require_npm yo
+    # require_npm flow-bin
+    # require_npm flow-typed
+    # require_npm servedir
+    # require_npm npm-check-updates
+     require_npm diff-so-fancy
+     require_npm git-recent
+     require_npm git-open
+    # require_npm http-server
+     require_gem bundler
+     require_gem rake
+     require_gem sass
+     require_gem scss-lint
+     require_pip requests
+     require_pip beautifulsoup
+     require_pip pillow
+     require_pip sqlalchemy
+     require_pip pygments
+     require_pip flask
+     require_pip flake8
+     require_pip flake8-docstrings
+     require_apm linter-flake8
     ok "packages installed..."
 else
     ok "skipped packages."
